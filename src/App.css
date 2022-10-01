@@ -15,6 +15,7 @@ body {
   width: 500px;
   height: 500px;
   border-radius: 10px;
+  padding: 4rem;
 }
 
 
@@ -23,15 +24,15 @@ body {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-row-gap: 20px;
   justify-items: center;
 }
 
 .die-item {
   background-color: #ffffff;
-  width: 36px;
-  height: 36px;
-  border-radius: 3px;
+  width: 55px;
+  height: 55px;
+  border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, .1);
   text-align: center;
 }
