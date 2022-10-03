@@ -42,6 +42,7 @@ body {
   grid-column-gap: 10px;
   grid-row-gap: 20px;
   justify-items: center;
+  margin-bottom: 30px;
 }
 
 .die-item {
@@ -49,9 +50,13 @@ body {
   width: 55px;
   height: 55px;
   border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, .1);
   padding-top: 2px;
   text-align: center;
+}
+
+.die-item,
+.die-btn {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, .1);
   cursor: pointer;
 }
 
@@ -59,4 +64,21 @@ body {
   font-size: 2rem;
   font-weight: 600;
   display: inline-block;
+}
+
+.die-btn {
+  background-color: #5035FF;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  color: #ffffff;
+  font-size: 1.5rem;
+  min-width: 125px;
+  display: block;
+  margin: 0 auto;
+}
+
+.die-btn:active {
+  box-shadow: inset 3px 3px 7px -3px rgba(0, 0, 0, 0.6);
+  background-color: #3f2bbd;
 }
