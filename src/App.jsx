@@ -10,6 +10,14 @@ function App() {
     setDiceArray(allNewDice);
   }
 
+  function holdDice(id) {
+    setDiceArray((prevDiceArray) =>
+      prevDiceArray.map((die) => {
+        return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
+      })
+    );
+  }
+
   //  array of 10 random numbers between 1-6
   function allNewDice() {
     const array = [];
@@ -25,7 +33,14 @@ function App() {
   }
 
   const singleDie = diceArray.map((dice) => {
-    return <Die key={Die.id} value={dice.value} />;
+    return (
+      <Die
+        key={dice.id}
+        value={dice.value}
+        bg={dice.isHeld ? 'isHeld' : ''}
+        holdDice={() => holdDice(dice.id)}
+      />
+    );
   });
 
   return (
