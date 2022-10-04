@@ -8,16 +8,6 @@ function App() {
   const [diceArray, setDiceArray] = useState(allNewDice);
   const [tenzies, setTenzies] = useState(false);
 
-  /**
-   * Challenge: Tie off loose ends!
-   * 1. If tenzies is true, Change the button text to "New Game"
-   * 2. If tenzies is true, use the "react-confetti" package to
-   *    render the <Confetti /> component 🎉
-   *
-   *    Hint: don't worry about the `height` and `width` props
-   *    it mentions in the documentation.
-   */
-
   useEffect(() => {
     const allHeld = (die) => die.isHeld === true;
     const allNums = (die) => die.value === die.value;
@@ -29,17 +19,22 @@ function App() {
   }, [diceArray]);
 
   function handleRollDice() {
-    setDiceArray((prevDiceArray) =>
-      prevDiceArray.map((die) => {
-        return die.isHeld === true
-          ? die
-          : {
-              value: Math.floor(Math.random() * 6 + 1),
-              isHeld: false,
-              id: nanoid(),
-            };
-      })
-    );
+    if (!tenzies) {
+      setDiceArray((prevDiceArray) =>
+        prevDiceArray.map((die) => {
+          return die.isHeld === true
+            ? die
+            : {
+                value: Math.floor(Math.random() * 6 + 1),
+                isHeld: false,
+                id: nanoid(),
+              };
+        })
+      );
+    } else {
+      setTenzies(false);
+      setDiceArray(allNewDice);
+    }
   }
 
   function holdDice(id) {
