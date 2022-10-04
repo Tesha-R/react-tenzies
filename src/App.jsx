@@ -1,13 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
+import Confetti from 'react-confetti';
 import Die from './Die';
 import Header from './Header';
 
 function App() {
   const [diceArray, setDiceArray] = useState(allNewDice);
+  const [tenzies, setTenzies] = useState(false);
+
+  /**
+   * Challenge: Tie off loose ends!
+   * 1. If tenzies is true, Change the button text to "New Game"
+   * 2. If tenzies is true, use the "react-confetti" package to
+   *    render the <Confetti /> component 🎉
+   *
+   *    Hint: don't worry about the `height` and `width` props
+   *    it mentions in the documentation.
+   */
+
+  useEffect(() => {
+    const allHeld = (die) => die.isHeld === true;
+    const allNums = (die) => die.value === die.value;
+
+    if (diceArray.every(allHeld) && diceArray.every(allNums)) {
+      console.log('you won');
+      setTenzies(true);
+    }
+  }, [diceArray]);
 
   function handleRollDice() {
-    setDiceArray(allNewDice);
+    setDiceArray((prevDiceArray) =>
+      prevDiceArray.map((die) => {
+        return die.isHeld === true
+          ? die
+          : {
+              value: Math.floor(Math.random() * 6 + 1),
+              isHeld: false,
+              id: nanoid(),
+            };
+      })
+    );
   }
 
   function holdDice(id) {
@@ -45,10 +77,11 @@ function App() {
 
   return (
     <div className="main-el">
+      {tenzies && <Confetti />}
       <Header />
       <div className="die-el">{singleDie}</div>
       <button className="die-btn" onClick={handleRollDice}>
-        Roll
+        {tenzies ? 'Reset Game' : 'Roll'}
       </button>
     </div>
   );
